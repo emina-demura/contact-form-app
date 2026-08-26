@@ -158,8 +158,8 @@ sail artisan migrate --seed
 sail artisan migrate:fresh --seed
 
 ## 使用技術
-- PHP 8.x
-- Laravel 10.x
+- PHP 8.5.8
+- Laravel 10.50.3
 - MySQL、phpMyAdmin
 - マイグレーション、シーダー
 - Docker
