@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-    // 開発環境でのみ実行
+        // 開発環境でのみ実行
         if (app()->environment('local')) {
         }
         $this->call([

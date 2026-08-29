@@ -2,11 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
+use App\Models\Category;
 use App\Models\Contact;
 use App\Models\Tag;
-use App\Models\Category;
+use Illuminate\Database\Seeder;
 
 class ContactSeeder extends Seeder
 {
@@ -16,12 +15,12 @@ class ContactSeeder extends Seeder
     public function run(): void
     {
         for ($i = 0; $i < 20; $i++) {
-        //お問い合わせを20件作成
+            // お問い合わせを20件作成
             $contacts = Contact::create([
-                'first_name' => fake('ja_JP')->firstName(),
                 'last_name' => fake('ja_JP')->lastName(),
-                //genderは1:男性、2:女性、3:その他
-                'gender' => fake('ja_JP')->randomElement([1,2,3]),
+                'first_name' => fake('ja_JP')->firstName(),
+                // genderは1:男性、2:女性、3:その他
+                'gender' => fake('ja_JP')->randomElement([1, 2, 3]),
                 'email' => fake('ja_JP')->unique()->safeEmail(),
                 'tel' => fake('ja_JP')->unique()->phoneNumber(),
                 'address' => fake('ja_JP')->address(),
@@ -32,7 +31,7 @@ class ContactSeeder extends Seeder
             ]);
 
             // タグを1〜3個ランダムで付与（仕様書の要件）
-            $tags = Tag::inRandomOrder()->take(rand(1,3))->pluck('id');
+            $tags = Tag::inRandomOrder()->take(rand(1, 3))->pluck('id');
             $contacts->tags()->attach($tags);
         }
     }
