@@ -18,8 +18,9 @@ class Contact extends Model
         'tel',
         'address',
         'building',
-        'detail',
         'category_id',
+        'detail',
+        'created_at',
     ];
 
     public function category(): BelongsTo

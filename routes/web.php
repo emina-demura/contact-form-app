@@ -22,25 +22,15 @@ Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
 
-Route::get('/register', function () {
-    return view('auth.register');
-})->name('register');
-
-Route::get('/logout', function () {
-    return view('auth.logout');
-})->name('logout');
-
 Route::middleware('auth')->prefix('admin')->group(function () {
-
-    // 管理画面トップ（一覧）
-    Route::get('/admin', [AdminController::class, 'index'])->name('admin.contacts.index');
-
-    // お問い合わせ詳細ページ
-    Route::get('/contacts/{contact}', [AdminController::class, 'show'])->name('admin.contacts.show');
-
-    // 管理画面検索
-    Route::get('/query', [AdminController::class, 'query'])->name('admin.query');
-
+    // お問い合わせ一覧
+    Route::get('/', [AdminController::class, 'index'])->name('admin.index');
+    // お問い合わせ詳細
+    Route::get('/contacts/{contact}', [AdminController::class, 'show'])->name('admin.show');
     // お問い合わせ削除
-    Route::delete('/contacts/{contact}', [AdminController::class, 'destroy'])->name('admin.contacts.destroy');
+    Route::delete('/contacts/{contact}', [AdminController::class, 'destroy'])->name('admin.destroy');
+    // お問い合わせ作成（準備中）
+    Route::get('/contacts/create', fn () => 'お問い合わせ作成（準備中）')->name('contacts.create');
+    // カテゴリー一覧（準備中）
+    Route::get('/categories', fn () => 'カテゴリー一覧（準備中）')->name('categories.index');
 });

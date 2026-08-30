@@ -17,8 +17,8 @@ class ContactSeeder extends Seeder
         for ($i = 0; $i < 20; $i++) {
             // お問い合わせを20件作成
             $contacts = Contact::create([
-                'first_name' => fake('ja_JP')->firstName(),
                 'last_name' => fake('ja_JP')->lastName(),
+                'first_name' => fake('ja_JP')->firstName(),
                 // genderは1:男性、2:女性、3:その他
                 'gender' => fake('ja_JP')->randomElement([1, 2, 3]),
                 'email' => fake('ja_JP')->unique()->safeEmail(),
