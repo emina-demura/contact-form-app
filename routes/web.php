@@ -1,16 +1,23 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return redirect()->route('login');
-});
+// お問い合わせフォーム（一般ユーザが利用）
+// お問い合わせフォーム入力ページ（GET /）
+Route::get('/', [ContactController::class, 'index'])->name('contacts.index');
 
-Route::get('/register', function () {
-    return view('auth.register');
-})->name('register');
+// お問い合わせフォーム確認ページ（POST /contacts/confirm）
+Route::post('/contacts/confirm', [ContactController::class, 'confirm'])->name('contacts.confirm');
 
+// 完了サンクスページ（GET /thanks）
+Route::get('/thanks', [ContactController::class, 'thanks'])->name('contacts.thanks');
+
+// 検索（ユーザー側）
+Route::get('/contacts/search', [ContactController::class, 'search'])->name('contacts.search');
+
+// ログインとログイン後のページ（管理者が利用）
 Route::get('/login', function () {
     return view('auth.login');
 })->name('login');

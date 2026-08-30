@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Http\Requests;
-
-use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class IndexContactRequest extends FormRequest
@@ -12,28 +10,15 @@ class IndexContactRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-            'last_name' => [
-                'required',
-                'string',
-                'max:255',
-            ],
-
-            'first_name' => [
-                'required',
-                'string',
-                'max:255',
-            ],
+            'keyword' => ['nullable', 'string', 'max:255'],
+            'gender' => ['nullable', 'integer', 'in:0,1,2'],
+            'category_id' => ['nullable', 'integer', 'exists:categories,id'],
+            'date' => ['nullable', 'date'],
         ];
     }
 }

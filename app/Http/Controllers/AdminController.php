@@ -2,14 +2,19 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Http\Requests\IndexContactRequest;
+use App\Models\Category;
 use App\Models\Contact;
-use Illuminate\Http\Request;
+
 
 class AdminController extends Controller
 {
-    public function index(Request $request)
+    // お問い合わせフォーム検索機能
+    public function index(IndexContactRequest $request)
     {
-        $categories = [];
+        $categories = Category::all();
+
         $keyword = $request->input('keyword');
         $gender = $request->input('gender');
         $category_id = $request->input('category_id');
@@ -52,8 +57,7 @@ class AdminController extends Controller
     public function destroy(Contact $contact)
     {
         $contact->delete();
-
-        return redirect()->route('admin.index')
+        return redirect()->route('admin.contacts.index')
             ->with('success', 'お問い合わせを削除しました。');
     }
 }
